@@ -18,7 +18,9 @@ envelope.addEventListener("click", () => {
 })
 
 
-noBtn.addEventListener("mouseover", () => {
+let noInterval = null;
+
+function moveNoBtn() {
     const min = 200;
     const max = 200;
 
@@ -28,9 +30,19 @@ noBtn.addEventListener("mouseover", () => {
     const moveX = Math.cos(angle) * distance;
     const moveY = Math.sin(angle) * distance;
 
-    noBtn.style.transition = "transform 0.3s ease"
+    noBtn.style.transition = "transform 0.3s ease";
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
-})
+}
+
+noBtn.addEventListener("mouseenter", () => {
+    moveNoBtn();
+    noInterval = setInterval(moveNoBtn, 300);
+});
+
+noBtn.addEventListener("mouseleave", () => {
+    clearInterval(noInterval);
+    noInterval = null;
+});
 
 
 // let yesScale = 1;
